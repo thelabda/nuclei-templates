@@ -1,4 +1,4 @@
-id: Labda_403Bypass_post
+id: Labda_403Bypass_method
 
 info:
   name: Labda 403 bypass
@@ -6,23 +6,10 @@ info:
   description: Bypasses 403 Forbidden
   tags: bypass, web, 403, Forbidden
 
-# requests:
-#   - method: POST
-#     path:
-#       - "{{BaseURL}}"
-#     headers:
-#       User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36
-#       Content-Length: 0
-
-#     matchers:
-#       - type: status
-#         status:
-#           - 200
-
 requests:
   - raw:
       - |+
-        {{method}} / HTTP/2
+        {{method}} / HTTP/1.1
         Host: {{BaseURL}}
         User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36
     payloads:
@@ -31,6 +18,7 @@ requests:
         - PUT
         - TRACE
         - OPTIONS
+        - PATCH
     attack: batteringram
     unsafe: true
     matchers:
