@@ -6,27 +6,10 @@ info:
   description: Bypasses 403 Forbidden
   tags: bypass, web, 403, Forbidden
 
-
-
-# requests:
-#   - method: GET
-#     path:
-#       - "https://{{BaseURL}}"
-#     headers:
-#       User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36
-#       X-Client-Ip: 127.0.0.1
-
-#     matchers:
-#       - type: status
-#         status:
-#           - 200
-
-
-
 requests:
   - raw:
       - |+
-        GET / HTTP/1.1
+        GET / HTTP/2
         Host: {{BaseURL}}
         User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36
         {{header_types}}: {{header_values}}
