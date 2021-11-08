@@ -13,6 +13,7 @@ requests:
     path:
       - "{{BaseURL}}"
     
+    
     matchers-condition: or
     matchers:
       - type: status
