@@ -7,7 +7,7 @@ info:
   tags: find, web, 403, Forbidden
 
 workflows:
-  - template: /Users/kisgergely/nuclei-templates/coli/403_workflow/403-finder.yaml
+  - template: nuclei-templates/coli/403_workflow/403-finder.yaml
     matchers:
       - name: forbidden
         subtemplates:
