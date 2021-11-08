@@ -13,3 +13,4 @@ workflows:
         subtemplates:
           - template: /Users/kisgergely/nuclei-templates/coli/403_workflow/403-bypass_xclient.yaml
           - template: /Users/kisgergely/nuclei-templates/coli/403_workflow/403-bypass_post.yaml
+          - template: /Users/kisgergely/nuclei-templates/coli/403_workflow/403-bypass_trace.yaml
