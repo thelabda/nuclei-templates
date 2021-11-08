@@ -16,9 +16,14 @@ requests:
     payloads:
       rewrite:
         - .htaccess
-        - PUT
-        - TRACE
-        - OPTIONS
+        - .git
+        - "%2f"
+        - "%2e/js/"
+        - "/*"
+        - "/./"
+        - "./."
+        - "/*/"
+        
     attack: batteringram
     unsafe: true
     matchers:
