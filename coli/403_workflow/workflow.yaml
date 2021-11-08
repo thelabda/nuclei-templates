@@ -1,0 +1,15 @@
+id: Labda_403_workflow
+
+info:
+  name: Labda 403 workflow
+  author: Labda
+  description: Workflow for 403 Forbidden
+  tags: find, web, 403, Forbidden
+
+workflows:
+  - template: /Users/kisgergely/nuclei-templates/coli/403_workflow/403-finder.yaml
+    matchers:
+      - name: forbidden
+        subtemplates:
+          - template: /Users/kisgergely/nuclei-templates/coli/403_workflow/403-bypass_xclient.yaml
+          - template: /Users/kisgergely/nuclei-templates/coli/403_workflow/403-bypass_post.yaml
