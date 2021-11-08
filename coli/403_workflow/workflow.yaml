@@ -11,7 +11,7 @@ workflows:
     matchers:
       - name: forbidden
         subtemplates:
-         - template: /Users/kisgergely/nuclei-templates/coli/403_workflow/403-bypass_xheaders.yaml
-         - template: /Users/kisgergely/nuclei-templates/coli/403_workflow/403-bypass_method.yaml
-         - template: /Users/kisgergely/nuclei-templates/coli/403_workflow/403-bypass_xrewriteurl.yaml
-         - template: /Users/kisgergely/nuclei-templates/coli/403_workflow/403-bypass_slash.yaml
+         - template: nuclei-templates/403_workflow/403-bypass_xheaders.yaml
+         - template: nuclei-templates/coli/403_workflow/403-bypass_method.yaml
+         - template: nuclei-templates/coli/403_workflow/403-bypass_xrewriteurl.yaml
+         - template: nuclei-templates/coli/403_workflow/403-bypass_slash.yaml
