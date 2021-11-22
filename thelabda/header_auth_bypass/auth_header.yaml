@@ -18,6 +18,7 @@ requests:
         - PUT
         - TRACE
         - OPTIONS
+        - CONNECT
         - PATCH
     attack: batteringram
     unsafe: true
