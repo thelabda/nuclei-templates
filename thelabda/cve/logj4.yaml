@@ -3,8 +3,8 @@ id: Labda_rce_apache
 info:
   name: Labda rce
   author: Labda
-  description: Bypasses authorization with header modification
-  tags: bypass, web, authorization, Forbidden
+  description: Log4Shell
+  tags: web, rce,
 
 requests:
   - raw:
