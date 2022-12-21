@@ -66,7 +66,7 @@ def funct_hostheader():
                             save_to_file("\n" + target)
                 #INJECTION FAILED - 
                 elif param_host not in str(req.content) and param_host not in str(req.headers):
-                            print("\n" + Fore.GREEN + "|" + param_host + "|" + "| Host Header Injection failed on: " + target + " --> Response:" + str(req.status_code))
+                            print("\n" + Fore.GREEN + "|" + param_host + "|" + "Host Header Injection failed on: " + target + " --> Response:" + str(req.status_code))
         
         except ConnectTimeout:
             pass
