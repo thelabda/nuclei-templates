@@ -58,15 +58,15 @@ def funct_hostheader():
                 req = session.get(target, headers=headers, verify=False, timeout=5, allow_redirects=True)
                 #RESPONSE BODY INJECTED +
                 if param_host in str(req.content):
-                            print("\n" + Fore.GREEN +  "|" + param_host + "| Injected on host: " + target + " --> Injected HOST reflected in BODY! Response:" + str(req.status_code))
+                            print("\n" + Fore.RED +  "|" + param_host + "| Injected on host: " + target + " --> Injected HOST reflected in BODY! --> Response:" + str(req.status_code))
                             save_to_file("\n" + target)
                 #RESPONSE HEADER INJECTED +
                 elif param_host in str(req.headers):
-                            print("\n" + Fore.GREEN +  "|" + param_host + "| Injected on host: " + target + " --> Injected HOST reflected in HEADER! Response:" + str(req.status_code))
+                            print("\n" + Fore.RED +  "|" + param_host + "| Injected on host: " + target + " --> Injected HOST reflected in HEADER! --> Response:" + str(req.status_code))
                             save_to_file("\n" + target)
                 #INJECTION FAILED - 
                 elif param_host not in str(req.content) and param_host not in str(req.headers):
-                            print("\n" +  "|" + param_host + "|" + Fore.RED + "| Injection failed on: " + target + Fore.RESET + " --> Response:" + str(req.status_code))
+                            print("\n" +  "|" + param_host + "|" + Fore.GREEN + "| Host Header Injection failed on: " + target + " --> Response:" + str(req.status_code))
         
         except ConnectTimeout:
             pass
@@ -101,15 +101,15 @@ def funct_cors():
                 req = session.get(target, headers=headers, verify=False, timeout=5, allow_redirects=True)
                 #RESPONSE BODY INJECTED +
                 if param_origin in str(req.content):
-                            print("\n" + Fore.GREEN +  "|" + param_origin + "| Injected on host: " + target + " --> Injected Origin reflected in BODY! Response:" + str(req.status_code))
+                            print("\n" + Fore.RED +  "|" + param_origin + "| Origin Injected on host: " + target + " --> Injected Origin reflected in BODY! --> Response:" + str(req.status_code))
                             save_to_file("\n" + target)
                 #RESPONSE HEADER INJECTED +
                 elif param_origin in str(req.headers):
-                            print("\n" + Fore.GREEN +  "|" + param_origin + "| Injected on host: " + target + " --> Injected Origin reflected in HEADER! Response:" + str(req.status_code))
+                            print("\n" + Fore.RED +  "|" + param_origin + "| Origin Injected on host: " + target + " --> Injected Origin reflected in HEADER! --> Response:" + str(req.status_code))
                             save_to_file("\n" + target)
                 #INJECTION FAILED
                 elif param_origin not in str(req.content) and param_origin not in str(req.headers):
-                            print("\n" +  "|" + param_origin + "|" + Fore.RED + " Injection failed on: " + target + Fore.RESET + " --> Response:" + str(req.status_code))
+                            print(Fore.GREEN + "\n" +  "|" + param_origin + "|" + " Origin Injection failed on: " + target + " --> Response:" + str(req.status_code))
         
         
         except ConnectTimeout:
@@ -141,11 +141,11 @@ def funct_clickjacking():
                 req = session.get(target, verify=False, timeout=5, allow_redirects=True)
                 #RESPONSE HEADER INJECTED +
                 if "X-Frame-Options: DENY" in str(req.headers) or "X-Frame-Options: SAMEORIGIN" in str(req.headers):
-                            print("\n" + Fore.GREEN +  "| Vulnerable host: " + target + " Response:" + str(req.status_code))
+                            print("\n" + Fore.RED +  "| Clickjacking Vulnerable host: " + target + " --> Response:" + str(req.status_code))
                             save_to_file("\n" + target)
                 #INJECTION FAILED
                 elif "X-Frame-Options:" not in str(req.headers):
-                            print("\n" + Fore.RED +  "|" + target + " is not vulnerable | Response:" + str(req.status_code))
+                            print("\n" + Fore.GREEN +  "|" + target + " is not vulnerable for Clickjacking | --> Response:" + str(req.status_code))
         
         
         except ConnectTimeout:
@@ -156,6 +156,43 @@ def funct_clickjacking():
             pass
     save_to_file("\nFinished test for ClickJacking")
     
+
+def funct_hsts():
+    global menu
+    save_to_file("\nHSTS missing:")
+
+    if global_set == 1:
+            global target_global
+            param_file = target_global
+            os.system("clear")
+            print(Fore.RESET + "Global targets set to: " + param_file + "To test for HSTS vulnerability")
+    else:
+            global target_file
+            param_file = target_file
+
+    list=[]
+    f = open(param_file,'r')
+    for x in f:
+        target = 'https://' + x.replace('\n','')
+        try:
+                req = session.get(target, verify=False, timeout=5, allow_redirects=True)
+                #HSTS exists
+                if "Strict-Transport-Security" in str(req.headers):
+                            print("\n" + Fore.GREEN +  "HSTS header not missing: " + target + " --> Response:" + str(req.status_code))
+                #HSTS Missing
+                elif "Strict-Transport-Security" not in str(req.headers):
+                            print("\n" + Fore.RED +  "|" + target + " -  HSTS header Missing --> Response:" + str(req.status_code))
+                            save_to_file("\n" + target)
+        
+        
+        except ConnectTimeout:
+            pass
+        except (requests.exceptions.TooManyRedirects) as e:
+            pass
+        except requests.exceptions.ConnectionError as e:
+            pass
+    save_to_file("\nFinished test for HSTS")
+    
     menu=True
     funct_main_menu()
 
@@ -164,6 +201,7 @@ def funct_magicHax():
     funct_hostheader()
     funct_cors()
     funct_clickjacking()
+    funct_hsts()
 
 
 
