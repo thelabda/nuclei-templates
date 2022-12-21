@@ -192,9 +192,46 @@ def funct_hsts():
         except requests.exceptions.ConnectionError as e:
             pass
     save_to_file("\nFinished test for HSTS")
-    
+
+def funct_xss():
+    global menu
+    save_to_file("\nXSS Header missing:")
+
+    if global_set == 1:
+            global target_global
+            param_file = target_global
+            os.system("clear")
+            print(Fore.RESET + "Global targets set to: " + param_file + "To test for XSS header vulnerability")
+    else:
+            global target_file
+            param_file = target_file
+
+    list=[]
+    f = open(param_file,'r')
+    for x in f:
+        target = 'https://' + x.replace('\n','')
+        try:
+                req = session.get(target, verify=False, timeout=5, allow_redirects=True)
+                #HSTS exists
+                if "X-XSS-Protection" in str(req.headers):
+                            print("\n" + Fore.GREEN +  "XSS header not missing: " + target + " --> Response:" + str(req.status_code))
+                #HSTS Missing
+                elif "X-XSS-Protection" not in str(req.headers):
+                            print("\n" + Fore.RED +  "|" + target + " -  XSS header Missing --> Response:" + str(req.status_code))
+                            save_to_file("\n" + target)
+        
+        
+        except ConnectTimeout:
+            pass
+        except (requests.exceptions.TooManyRedirects) as e:
+            pass
+        except requests.exceptions.ConnectionError as e:
+            pass
+    save_to_file("\nFinished test for XSS header")
     menu=True
     funct_main_menu()
+
+
 
 
 def funct_magicHax():
@@ -202,6 +239,7 @@ def funct_magicHax():
     funct_cors()
     funct_clickjacking()
     funct_hsts()
+    funct_xss()
 
 
 
