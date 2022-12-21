@@ -59,11 +59,11 @@ def funct_hostheader():
                 #RESPONSE BODY INJECTED +
                 if param_host in str(req.content):
                             print("\n" + Fore.GREEN +  "|" + param_host + "| Injected on host: " + target + " --> Injected HOST reflected in BODY! Response:" + str(req.status_code))
-                            save_to_file("\n" + Fore.GREEN + target)
+                            save_to_file("\n" + target)
                 #RESPONSE HEADER INJECTED +
                 elif param_host in str(req.headers):
                             print("\n" + Fore.GREEN +  "|" + param_host + "| Injected on host: " + target + " --> Injected HOST reflected in HEADER! Response:" + str(req.status_code))
-                            save_to_file("\n" + Fore.GREEN + target)
+                            save_to_file("\n" + target)
                 #INJECTION FAILED - 
                 elif param_host not in str(req.content) and param_host not in str(req.headers):
                             print("\n" +  "|" + param_host + "|" + Fore.RED + "| Injection failed on: " + target + Fore.RESET + " --> Response:" + str(req.status_code))
@@ -77,7 +77,7 @@ def funct_hostheader():
 
 def funct_cors():
     global menu
-    save_to_file(Fore.RESET + "\nCORS Header Successfully Injected:")
+    save_to_file("\nCORS Header Successfully Injected:")
 
     if global_set == 1:
             global target_global
@@ -102,11 +102,11 @@ def funct_cors():
                 #RESPONSE BODY INJECTED +
                 if param_origin in str(req.content):
                             print("\n" + Fore.GREEN +  "|" + param_origin + "| Injected on host: " + target + " --> Injected Origin reflected in BODY! Response:" + str(req.status_code))
-                            save_to_file("\n" + Fore.GREEN + target)
+                            save_to_file("\n" + target)
                 #RESPONSE HEADER INJECTED +
                 elif param_origin in str(req.headers):
                             print("\n" + Fore.GREEN +  "|" + param_origin + "| Injected on host: " + target + " --> Injected Origin reflected in HEADER! Response:" + str(req.status_code))
-                            save_to_file("\n" + Fore.GREEN + target)
+                            save_to_file("\n" + target)
                 #INJECTION FAILED
                 elif param_origin not in str(req.content) and param_origin not in str(req.headers):
                             print("\n" +  "|" + param_origin + "|" + Fore.RED + " Injection failed on: " + target + Fore.RESET + " --> Response:" + str(req.status_code))
@@ -118,11 +118,11 @@ def funct_cors():
             pass
         except requests.exceptions.ConnectionError as e:
             pass
-    save_to_file(Fore.RESET + "\nFinished CORS Header Injection")
+    save_to_file("\nFinished CORS Header Injection")
 
 def funct_clickjacking():
     global menu
-    save_to_file(Fore.RESET + "\nClickJacking vulnerability Detected:")
+    save_to_file("\nClickJacking vulnerability Detected:")
 
     if global_set == 1:
             global target_global
@@ -142,7 +142,7 @@ def funct_clickjacking():
                 #RESPONSE HEADER INJECTED +
                 if "X-Frame-Options: DENY" in str(req.headers) or "X-Frame-Options: SAMEORIGIN" in str(req.headers):
                             print("\n" + Fore.GREEN +  "| Vulnerable host: " + target + " Response:" + str(req.status_code))
-                            save_to_file("\n" + Fore.GREEN + target)
+                            save_to_file("\n" + target)
                 #INJECTION FAILED
                 elif "X-Frame-Options:" not in str(req.headers):
                             print("\n" + Fore.RED +  "|" + target + " is not vulnerable | Response:" + str(req.status_code))
@@ -154,7 +154,7 @@ def funct_clickjacking():
             pass
         except requests.exceptions.ConnectionError as e:
             pass
-    save_to_file(Fore.RESET + "\nFinished test for ClickJacking")
+    save_to_file("\nFinished test for ClickJacking")
     
     menu=True
     funct_main_menu()
